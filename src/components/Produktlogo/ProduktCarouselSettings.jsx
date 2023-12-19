@@ -1,7 +1,9 @@
+import placeholderImg from "../../assets/images/placeholder.png";
+
 const ProduktCarouselSettings = {
-  logo1: "../../assets/images/placeholder.png",
-  logo2: "../../assets/images/placeholder.png",
-  logo3: "../../assets/images/placeholder.png",
-  logo4: "../../assets/images/placeholder.png",
+  logo1: placeholderImg,
+  logo2: placeholderImg,
+  logo3: placeholderImg,
+  logo4: placeholderImg,
 };
 export default ProduktCarouselSettings;

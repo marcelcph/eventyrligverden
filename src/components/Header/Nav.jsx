@@ -20,12 +20,12 @@ function Nav() {
             </div>
           </div>
           {/*shopping icon med dropdown*/}
-          <div class="dropdown dropdown-end flex-none ">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-              <div class="indicator">
+          <div className="dropdown dropdown-end flex-none ">
+            <div tabindex="0" role="button" className="btn btn-ghost btn-circle">
+              <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -37,24 +37,24 @@ function Nav() {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span class="badge badge-sm indicator-item">8</span>
+                <span className="badge badge-sm indicator-item">8</span>
               </div>
             </div>
             <div
               tabindex="0"
-              class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
-              <div class="card-body">
-                <span class="font-bold text-lg">8 Items</span>
-                <span class="text-info">Subtotal: $999</span>
-                <div class="card-actions">
-                  <button class="btn btn-primary btn-block">View cart</button>
+              <div className="card-body">
+                <span className="font-bold text-lg">8 Items</span>
+                <span className="text-info">Subtotal: $999</span>
+                <div className="card-actions">
+                  <button className="btn btn-primary btn-block">View cart</button>
                 </div>
               </div>
             </div>
           </div>
           {/*burger menu*/}
-          <div className=" drawer-end md:hidden">
+          <div className=" drawer-end lg:hidden">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="">
               <label
@@ -77,7 +77,6 @@ function Nav() {
                   />
                 </svg>
               </label>
-             
             </div>
             <div className="drawer-side z-20">
               <label
@@ -97,8 +96,32 @@ function Nav() {
             </div>
           </div>
         </div>
-
-        
+        <div className="hidden lg:flex justify-center">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <details>
+                <summary>Parent</summary>
+                <ul className="p-2">
+                  <li>
+                    <a>Submenu 1</a>
+                  </li>
+                  <li>
+                    <a>Submenu 2</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a>Item 3</a>
+            </li>
+            <li>
+              <a>Item 4</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   );
