@@ -9,9 +9,9 @@ function Hero1() {
         backgroundImage: `url(${placeholderImg})`,
       }}
     >
-      <div className="hero-content text-center">
+      <div className="hero-content">
         <div className="max-w-lg ml-96">
-          <h1 className="mb-5 text-7xl">{HeroSettings.title}</h1>
+          <h1 className="mb-5 text-7xl font-bold">{HeroSettings.title}</h1>
           <p className="mb-5 text-xl">{HeroSettings.beskrivelse}</p>
           <button className="btn btn-primary btn-md">
             {HeroSettings.knaptekst}
