@@ -1,19 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import BlogSettings from "./BloglistSettings";
 import axios from "axios";
 import BlogUrl from "../../utils/BlogUrl";
 
-function Blog() {
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(dateString).toLocaleDateString("da-DK", options);
+}
+
+function Bloglist() {
   const [blogPosts, setBlogPosts] = useState([]);
 
   // Function to fetch blog posts
   const fetchBlogPosts = async () => {
     try {
       const response = await axios.get(BlogUrl.WORDPRESS_BLOG_URL, {
-        params: { page: 1 }, // Load only page 1
+        params: { page: 1 },
       });
 
       if (response.data.length > 0) {
-        setBlogPosts(response.data);
+        // Format date before setting it in the state
+        const formattedBlogPosts = response.data.map((post) => ({
+          ...post,
+          date: formatDate(post.date),
+        }));
+
+        setBlogPosts(formattedBlogPosts);
       }
     } catch (error) {
       console.error("Error fetching blog posts", error);
@@ -21,14 +33,15 @@ function Blog() {
   };
 
   useEffect(() => {
-    // Fetch blog posts on initial load
     fetchBlogPosts();
-  }, []); // Empty dependency array to run the effect only once on mount
+  }, []);
 
   return (
     <>
       <section className="">
         <div className="container px-6 py-10 mx-auto">
+          <h1 className="text-center text-6xl pb-5">{BlogSettings.title}</h1>
+          <p className="text-center text-md">{BlogSettings.beskrivelse}</p>
           <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
             {blogPosts.map((blogPost) => (
               <div key={blogPost.id}>
@@ -42,15 +55,13 @@ function Blog() {
                 <h1 className="mt-6 text-xl font-semibold">
                   {blogPost.title.rendered}
                 </h1>
-                <hr className="w-32 my-6" />
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: blogPost.excerpt.rendered,
-                  }}
-                />
-                <a href={blogPost.link} className="inline-block mt-4 underline">
-                  Read more
-                </a>
+                <p>
+                  {/* Render formatted date */}
+                  {blogPost.date}
+                </p>
+                <button href={blogPost.link} className="btn btn-primary mt-4">
+                  {BlogSettings.knaptekst}
+                </button>
               </div>
             ))}
           </div>
@@ -60,4 +71,4 @@ function Blog() {
   );
 }
 
-export default Blog;
+export default Bloglist;
