@@ -6,13 +6,12 @@ import Nyhedsbrev from "../components/Nyhedsbrev/Nyhedsbrev";
 import Feature from "../components/Feature/Feature";
 function Home() {
   return (
-    <div className=" !mx-auto w-full ">
+    <div className="container mx-auto">
       <Hero2 />
       <ProduktCarousel />
       <Countdown />
       <Nyhedsbrev />
       <Feature />
-        
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
 import Nav from "./components/Header/Nav";
 import Banner from "./components/Header/Banner";
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           {/* Define routes with Route */}
           <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/blog" element={<Blog />} />
         </Routes>
         <Footer2 />
