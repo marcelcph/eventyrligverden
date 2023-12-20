@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 function Nav() {
   return (
     <>
-      <div className="max-w-6xl mx-auto py-4">
+      <div className="">
+      <div className="container mx-auto py-4">
         <div className="flex flex-row justify-center items-center  bg-base-100 ">
           {/*Logo*/}
           <div className="flex-none">
@@ -130,6 +131,7 @@ function Nav() {
             </li>
           </ul>
         </div>
+      </div>
       </div>
     </>
   );

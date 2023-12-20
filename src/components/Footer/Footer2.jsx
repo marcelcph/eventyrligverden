@@ -4,8 +4,8 @@ function Footer2() {
   return (
     <>
 
-<footer className="bg-white ">
-    <div className=" p-6">
+<footer className="bg-white">
+    <div className=" p-6 container mx-auto">
         <div className="lg:flex items-center">
             <div className="w-full -mx-6 lg:w-2/5">
                 <div className="px-6">
