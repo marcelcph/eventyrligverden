@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Url from "../../utils/Url";
+import { Url } from "../../utils/Url";
 
 function Produktliste() {
   const [products, setProducts] = useState([]);
