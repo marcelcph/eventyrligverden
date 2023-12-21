@@ -1,8 +1,9 @@
-import placeholderImg from "../../assets/images/placeholder.png";
+import virksomhedslogoIMG from "../../assets/images/placeholder-logo.png";
 
-const FooterSettings = {
-  logo: placeholderImg,
-  beskrivelse: "Kort beskrivelse af fx virksomhed",
+const Hovedinfo = {
+  virksomhedsnavn: "Virksomhedsnavn",
+  virksomhedslogo: virksomhedslogoIMG,
+  kortbeskrivelse: "Kort beskrivelse af din virksomhed", //Vises i footeren
 
   //Kontaktiformation
   telefonNr: "+45 11 11 11 11",
@@ -20,8 +21,5 @@ const FooterSettings = {
   linkedinLink: "https://www.linkedin.com/",
   twitter: true, // eller false baseret på din betingelse
   twitterLink: "https://twitter.com/",
-
-  //Copyright
-  copyRight: "@FirmaNavn - 2023 ",
 };
-export default FooterSettings;
+export default Hovedinfo;

@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Hovedinfo from "../../utils/Virksomhedsinfo/Hovedinfo";
+
 function Nav() {
   return (
     <>
@@ -7,7 +9,13 @@ function Nav() {
           <div className="flex flex-row justify-center items-center  bg-base-100 ">
             {/*Logo*/}
             <div className="flex-none">
-              <a className="btn btn-ghost text-xl">daisyUI</a>
+              <a className="btn btn-ghost text-xl">
+                <img
+                  src={Hovedinfo.virksomhedslogo}
+                  alt="Logo"
+                  className="w-[150px] md:w-[150px]"
+                />
+              </a>
             </div>
             {/*søgebar*/}
             <div className=" justify-center items-center grow ">

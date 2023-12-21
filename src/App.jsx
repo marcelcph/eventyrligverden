@@ -6,9 +6,12 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Nav from "./components/Header/Nav";
 import Banner from "./components/Header/Banner";
-import Footer2 from "./components/footer/Footer2";
+import Footer2 from "./components/Footer/Footer2";
 import SingleProdukt from "./components/Singleprodukt/SingleProdukt";
 import SingleBlog from "./components/Singleblog/SingleBlog";
+import Leveringsinfo from "./pages/Leveringsinfo";
+import Handelspolitik from "./pages/Handelspolitik";
+import Cookiepolitikker from "./pages/Cookiepolitik";
 import "./App.css";
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<SingleBlog />} />
           <Route path="/kontakt" element={<Contact />} />
+          <Route path="/leveringsinfo" element={<Leveringsinfo />} />
+          <Route path="/handelspolitik" element={<Handelspolitik />} />
+          <Route path="/cookiepolitik" element={<Cookiepolitikker />} />
         </Routes>
         <Footer2 />
       </Router>

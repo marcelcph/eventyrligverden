@@ -1,6 +1,9 @@
-import FooterSettings from "./FooterSettings";
+import { Link } from "react-router-dom";
+import Hovedinfo from "../../utils/Virksomhedsinfo/Hovedinfo";
 
 function Footer2() {
+  const nuværendeÅr = new Date().getFullYear();
+
   return (
     <>
       <footer className="bg-white">
@@ -9,18 +12,22 @@ function Footer2() {
             <div className="w-full -mx-6 lg:w-2/5">
               <div className="px-6">
                 <a href="#">
-                  <img src={FooterSettings.logo} alt="logo" className="h-12" />
+                  <img
+                    src={Hovedinfo.virksomhedslogo}
+                    alt="logo"
+                    className="w-[150px] md:w-[150px]"
+                  />
                 </a>
 
                 <p className="max-w-sm mt-2 text-gray-500 ">
-                  {FooterSettings.beskrivelse}
+                  {Hovedinfo.kortbeskrivelse}
                 </p>
 
                 <div className="flex mt-4 -mx-1.5 ">
-                  {FooterSettings.twitter && (
+                  {Hovedinfo.twitter && (
                     <a
                       className="mx-1.5 dark:hover:text-blue-400 text-gray-400 transition-colors duration-300 transform hover:text-blue-500"
-                      href="{FooterSettings.twitterLink}"
+                      href="{Hovedinfo.twitterLink}"
                     >
                       <svg
                         className="w-10 h-10 fill-current"
@@ -32,10 +39,10 @@ function Footer2() {
                       </svg>
                     </a>
                   )}
-                  {FooterSettings.linkedin && (
+                  {Hovedinfo.linkedin && (
                     <a
                       className="mx-1.5 dark:hover:text-blue-400 text-gray-400 transition-colors duration-300 transform hover:text-blue-500"
-                      href="{FooterSettings.linkedinLink}}"
+                      href="{Hovedinfo.linkedinLink}}"
                     >
                       <svg
                         className="w-8 h-8"
@@ -58,10 +65,10 @@ function Footer2() {
                       </svg>
                     </a>
                   )}
-                  {FooterSettings.facebook && (
+                  {Hovedinfo.facebook && (
                     <a
                       className="mx-1.5 dark:hover:text-blue-400 text-gray-400 transition-colors duration-300 transform hover:text-blue-500"
-                      href="{FooterSettings.facebookLink}"
+                      href="{Hovedinfo.facebookLink}"
                     >
                       <svg
                         className="w-8 h-8"
@@ -76,10 +83,10 @@ function Footer2() {
                       </svg>
                     </a>
                   )}
-                  {FooterSettings.instagram && (
+                  {Hovedinfo.instagram && (
                     <a
                       className="mx-1.5 dark:hover:text-blue-400 text-gray-400 transition-colors duration-300 transform hover:text-blue-500"
-                      href="{FooterSettings.instagramLink}"
+                      href="{Hovedinfo.instagramLink}"
                     >
                       <svg
                         className="w-8 h-8"
@@ -99,83 +106,61 @@ function Footer2() {
             </div>
 
             <div className="mt-6 lg:mt-0 lg:flex-1">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-end">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:justify-items-end">
                 <div>
-                  <h3 className="text-gray-700 uppercase ">About</h3>
-                  <a
-                    href="#"
+                  <h3 className="text-gray-700 uppercase ">Links</h3>
+                  <Link
+                    to="/shop"
                     className="block mt-2 text-sm text-gray-600  hover:underline"
                   >
-                    Company
-                  </a>
-                  <a
-                    href="#"
+                    Shop
+                  </Link>
+                  <Link
+                    to="/blog"
                     className="block mt-2 text-sm text-gray-600  hover:underline"
                   >
-                    community
-                  </a>
-                  <a
-                    href="#"
+                    Blog
+                  </Link>
+                  <Link
+                    to="/kontakt"
                     className="block mt-2 text-sm text-gray-600 hover:underline"
                   >
-                    Careers
-                  </a>
+                    Kontakt
+                  </Link>
                 </div>
 
                 <div>
-                  <h3 className="text-gray-700 uppercase ">Blog</h3>
-                  <a
-                    href="#"
-                    className="block mt-2 text-sm text-gray-600  hover:underline"
-                  >
-                    Tec
-                  </a>
-                  <a
-                    href="#"
-                    className="block mt-2 text-sm text-gray-600  hover:underline"
-                  >
-                    Music
-                  </a>
-                  <a
-                    href="#"
-                    className="block mt-2 text-sm text-gray-600  hover:underline"
-                  >
-                    Videos
-                  </a>
-                </div>
-
-                <div>
-                  <h3 className="text-gray-700 uppercase ">Products</h3>
-                  <a
-                    href="#"
+                  <h3 className="text-gray-700 uppercase ">Politikker</h3>
+                  <Link
+                    to="/leveringsinfo"
                     className="block mt-2 text-sm text-gray-600 hover:underline"
                   >
-                    Mega cloud
-                  </a>
-                  <a
-                    href="#"
+                    Leveringsinformation
+                  </Link>
+                  <Link
+                    to="/handelspolitik"
                     className="block mt-2 text-sm text-gray-600  hover:underline"
                   >
-                    Aperion UI
-                  </a>
-                  <a
-                    href="#"
+                    Handelspolitik
+                  </Link>
+                  <Link
+                    to="/cookiepolitik"
                     className="block mt-2 text-sm text-gray-600  hover:underline"
                   >
-                    Meraki UI
-                  </a>
+                    Cookiepolitik
+                  </Link>
                 </div>
 
                 <div>
                   <h3 className="text-gray-700 uppercase ">Contact</h3>
                   <p className="block mt-2 text-sm text-gray-600 hover:underline">
-                    {FooterSettings.telefonNr}
+                    {Hovedinfo.telefonNr}
                   </p>
                   <span className="block mt-2 text-sm text-gray-600  hover:underline">
-                    {FooterSettings.email}
+                    {Hovedinfo.email}
                   </span>
                   <span className="block mt-2 text-sm text-gray-600  hover:underline">
-                    {FooterSettings.cvr}
+                    {Hovedinfo.cvr}
                   </span>
                 </div>
               </div>
@@ -186,7 +171,8 @@ function Footer2() {
 
           <div>
             <p className="text-center text-gray-500 ">
-              {FooterSettings.copyRight}
+              @{Hovedinfo.virksomhedsnavn} - Alle rettigheder forbeholdes -{" "}
+              {nuværendeÅr}
             </p>
           </div>
         </div>
