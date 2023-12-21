@@ -9,13 +9,13 @@ function Nav() {
           <div className="flex flex-row justify-center items-center  bg-base-100 ">
             {/*Logo*/}
             <div className="flex-none">
-              <a className="btn btn-ghost text-xl">
+              <Link to="/">
                 <img
                   src={Hovedinfo.virksomhedslogo}
                   alt="Logo"
                   className="w-[150px] md:w-[150px]"
                 />
-              </a>
+              </Link>
             </div>
             {/*søgebar*/}
             <div className=" justify-center items-center grow ">
