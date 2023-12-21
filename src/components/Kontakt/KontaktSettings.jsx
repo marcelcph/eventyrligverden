@@ -1,15 +1,9 @@
-import placeholderImg from "../../assets/images/placeholder.png";
-
-const FooterSettings = {
-  logo: placeholderImg,
-  beskrivelse: "Kort beskrivelse af fx virksomhed",
-
-  //Kontaktiformation
-  telefonNr: "+45 11 11 11 11",
-  email: "test@test.dk",
-  adresse: "Adresse her",
-  åbningstider: "09:00-17:00",
-  cvr: "CVR 1234561",
+const kontaktSettings = {
+  //Kontaktinformation
+  overskrift: "Kontaktinformationer",
+  beliggenhed: "Gadevej 1, 1234 By",
+  telefon: "+45 12 34 56 78",
+  mail: "kontakt@email.dk",
 
   //Sociale medier
   facebook: true, // eller false baseret på din betingelse
@@ -21,7 +15,7 @@ const FooterSettings = {
   twitter: true, // eller false baseret på din betingelse
   twitterLink: "https://twitter.com/",
 
-  //Copyright
-  copyRight: "@FirmaNavn - 2023 ",
+  //Kontaktformular
+  titel: "Kontakt os gerne",
 };
-export default FooterSettings;
+export default kontaktSettings;

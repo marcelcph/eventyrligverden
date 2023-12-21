@@ -1,4 +1,4 @@
-import React from "react";
+import BannerSettings from "./BannerSettings";
 
 function Banner() {
   const svgArrow = (
@@ -16,12 +16,12 @@ function Banner() {
     <>
       <div className=" py-4 bg-black text-white ">
         <div className="flex flex-row w-auto max-w-6xl mx-auto justify-center items-center">
-          <p>SPAR MINIMUM 30% </p>
+          <p>{BannerSettings.tekst}</p>
           <a
-            href=""
+            href="{BannerSettings.link}"
             className="px-4 underline underline-offset-4 flex items-center"
           >
-            <span>UDSALGSVARER </span>
+            <span>{BannerSettings.linktekst}</span>
             {svgArrow}
           </a>
         </div>

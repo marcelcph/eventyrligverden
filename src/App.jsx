@@ -1,9 +1,9 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
+import Contact from "./pages/Contact";
 import Nav from "./components/Header/Nav";
 import Banner from "./components/Header/Banner";
 import Footer2 from "./components/footer/Footer2";
@@ -20,8 +20,9 @@ function App() {
           {/* Define routes with Route */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/shop/:productId" element={<SingleProdukt/>} />
+          <Route path="/shop/:productId" element={<SingleProdukt />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/kontakt" element={<Contact />} />
         </Routes>
         <Footer2 />
       </Router>

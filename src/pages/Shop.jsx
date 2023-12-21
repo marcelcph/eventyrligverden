@@ -1,4 +1,3 @@
-import React from "react";
 import Produktliste from "../components/Produktliste/Produktliste.jsx";
 
 function Shop() {
