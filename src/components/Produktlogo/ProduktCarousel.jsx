@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import {
   CarouselProvider,
   Slider,
@@ -33,8 +34,8 @@ function ProduktCarousel() {
   return (
     <>
       
-      <div className="2xl:mx-auto 2xl:container flex justify-center">
-        <div className="2xl:px-20 px-6 py-12 w-full lg:w-4/5">
+      <div className="  flex justify-center">
+        <div className=" py-12 w-full ">
           {/* Carousel for Small-Sized Screen */}
           <CarouselProvider
             className="relative block sm:hidden"
@@ -73,6 +74,7 @@ function ProduktCarousel() {
                   <Slide key={product.id} index={product.id}>
                     <div className="gallery-cell w-full h-full">
                       <div className="relative w-full h-full lg:block hidden">
+                      <Link to={`/shop/${product.id}`}>
                         <img
                           src={product.images[0].src}
                           alt={product.name}
@@ -83,6 +85,7 @@ function ProduktCarousel() {
                             {product.name}
                           </h1>
                         </div>
+                        </Link>
                       </div>
                       <div className="relative w-full h-full lg:hidden">
                         <img
@@ -130,7 +133,7 @@ function ProduktCarousel() {
             className="relative hidden sm:block"
             naturalSlideWidth={100}
             isIntrinsicHeight={true}
-            totalSlides={2.5}
+            totalSlides={2}
             visibleSlides={1}
             step={1}
             infinite={true}
@@ -164,28 +167,32 @@ function ProduktCarousel() {
                   <Slide key={product.id} index={product.id}>
                     <div className="gallery-cell w-full h-full">
                       <div className="relative w-full h-full lg:block hidden">
+                        <Link to={`/shop/${product.id}`}>
                         <img
                           src={product.images[0].src}
                           alt={product.name}
                           className="object-center object-fit w-full h-full"
                         />
                         <div className="pl-6 pb-6 lg:pl-8 lg:pb-8 absolute left-0 bottom-0">
-                          <h1 className="text-xl leading-5 lg:text-2xl lg:leading-normal font-medium text-white">
+                          <h1 className="text-xl leading-5 lg:text-2xl lg:leading-normal font-medium ">
                             {product.name}
                           </h1>
                         </div>
+                        </Link>
                       </div>
                       <div className="relative w-full h-full lg:hidden">
+                      <Link to={`/shop/${product.id}`}>
                         <img
                           src={product.images[0].src}
                           alt={product.name}
                           className="object-center object-cover w-full h-full"
                         />
                         <div className="pl-6 pb-6 lg:pl-8 lg:pb-8 absolute left-0 bottom-0">
-                          <h1 className="text-xl leading-5 lg:text-2xl lg:leading-normal font-medium text-white">
+                          <h1 className="text-xl leading-5 lg:text-2xl lg:leading-normal font-medium ">
                             {product.name}
                           </h1>
                         </div>
+                        </Link>
                       </div>
                     </div>
                   </Slide>

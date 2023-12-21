@@ -1,4 +1,4 @@
-import Levering from "../components/Leveringsinformation.jsx/Levering";
+import Levering from "../components/Leveringsinformation/Levering";
 
 function Leveringsinfo() {
   return <Levering />;
