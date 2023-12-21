@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Url } from "../../utils/Url";
 
@@ -123,7 +124,7 @@ function Produktliste() {
               </div>
               <div className="flex justify-between p-8">
                 <p className="text-lg">{product.price} kr.</p>
-                <button className="btn btn-primary">Se mere</button>
+                <Link to={`/shop/${product.id}`} className="btn btn-primary">Se mere</Link>
               </div>
             </div>
           ))}

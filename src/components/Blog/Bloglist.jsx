@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import BlogSettings from "./BloglistSettings";
 import axios from "axios";
 import BlogUrl from "../../utils/BlogUrl";
@@ -59,9 +60,9 @@ function Bloglist() {
                   {/* Render formatted date */}
                   {blogPost.date}
                 </p>
-                <button href={blogPost.link} className="btn btn-primary mt-4">
+                <Link to={`/blog/${blogPost.id}`} className="btn btn-primary mt-4">
                   {BlogSettings.knaptekst}
-                </button>
+                </Link>
               </div>
             ))}
           </div>

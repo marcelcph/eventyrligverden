@@ -8,6 +8,7 @@ import Nav from "./components/Header/Nav";
 import Banner from "./components/Header/Banner";
 import Footer2 from "./components/footer/Footer2";
 import SingleProdukt from "./components/Singleprodukt/SingleProdukt";
+import SingleBlog from "./components/Singleblog/SingleBlog";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:productId" element={<SingleProdukt />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:blogId" element={<SingleBlog />} />
           <Route path="/kontakt" element={<Contact />} />
         </Routes>
         <Footer2 />
