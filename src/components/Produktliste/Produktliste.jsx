@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Url } from "../../utils/Url";
+import Loading from "../../Loading/Loading";
 
 function Produktliste() {
   const [products, setProducts] = useState([]);
@@ -12,8 +13,8 @@ function Produktliste() {
   const [hasMore, setHasMore] = useState(true);
   const [loadedProductIds, setLoadedProductIds] = useState(new Set());
   const [initialLoad, setInitialLoad] = useState(false);
+  const [initialProductsLoaded, setInitialProductsLoaded] = useState(false);
 
-  // Function to fetch products and categories
   const fetchProductsAndCategories = async () => {
     try {
       const response = await axios.get(Url.WORDPRESS_WOO_URL, {
@@ -31,9 +32,12 @@ function Produktliste() {
         );
         setPage(page + 1);
 
-        // Extract categories from the first product
         if (!categories.length && response.data[0].categories) {
           setCategories(response.data[0].categories);
+        }
+
+        if (!initialProductsLoaded) {
+          setInitialProductsLoaded(true);
         }
       } else {
         setHasMore(false);
@@ -45,24 +49,22 @@ function Produktliste() {
 
   useEffect(() => {
     if (initialLoad) {
-      // Start fetching products and categories only after the initial load
       fetchProductsAndCategories();
     } else {
       setInitialLoad(true);
     }
-  }, [page, initialLoad]); // Include page and initialLoad in the dependency array
+  }, [page, initialLoad]);
 
-  // Function to handle category selection
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setPage(1);
     setHasMore(true);
     setProducts([]);
     setLoadedProductIds(new Set());
-    setInitialLoad(false); // Reset initialLoad when a new category is selected
+    setInitialLoad(false);
+    setInitialProductsLoaded(false);
   };
 
-  // Function to filter products based on the selected category
   const filteredProducts = selectedCategory
     ? products.filter((product) =>
         product.categories.some(
@@ -73,7 +75,6 @@ function Produktliste() {
 
   return (
     <div>
-      {/* Category buttons */}
       <div className="flex justify-center my-4">
         <button
           className={`btn mx-2 ${
@@ -98,13 +99,12 @@ function Produktliste() {
         ))}
       </div>
 
-      {/* Infinite scroll Product grid */}
       <InfiniteScroll
         dataLength={products.length}
         next={fetchProductsAndCategories}
-        hasMore={hasMore} // Use hasMore state to determine if there's more data to load
-        loader={<h4>Loading...</h4>}
-        scrollThreshold={0.9} // Adjust this value as needed
+        hasMore={hasMore}
+        loader={initialProductsLoaded ? <Loading /> : null}
+        scrollThreshold={0.9}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredProducts.map((product) => (
@@ -124,7 +124,9 @@ function Produktliste() {
               </div>
               <div className="flex justify-between p-8">
                 <p className="text-lg">{product.price} kr.</p>
-                <Link to={`/shop/${product.id}`} className="btn btn-primary">Se mere</Link>
+                <Link to={`/shop/${product.id}`} className="btn btn-primary">
+                  Se mere
+                </Link>
               </div>
             </div>
           ))}
