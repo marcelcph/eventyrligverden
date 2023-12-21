@@ -10,7 +10,7 @@ const Hovedinfo = {
   email: "test@test.dk",
   adresse: "Adresse her",
   åbningstider: "09:00-17:00",
-  cvr: "CVR 1234561",
+  cvr: "1234561",
 
   //Sociale medier
   facebook: true, // eller false baseret på din betingelse

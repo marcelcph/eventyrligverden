@@ -160,7 +160,7 @@ function Footer2() {
                     {Hovedinfo.email}
                   </span>
                   <span className="block mt-2 text-sm text-gray-600  hover:underline">
-                    {Hovedinfo.cvr}
+                    CVR: {Hovedinfo.cvr}
                   </span>
                 </div>
               </div>
