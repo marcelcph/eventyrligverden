@@ -3,6 +3,7 @@ import ProduktCarousel from "../components/Produktlogo/ProduktCarousel";
 import Countdown from "../components/Countdown/Countdown";
 import Nyhedsbrev from "../components/Nyhedsbrev/Nyhedsbrev";
 import Feature from "../components/Feature/Feature";
+import Bloguddrag from "../components/Blog/Bloguddrag";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Countdown />
       <Nyhedsbrev />
       <Feature />
+      <Bloguddrag />
     </div>
   );
 }
