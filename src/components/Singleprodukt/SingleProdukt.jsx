@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { SingleProductUrl } from "../../utils/Url";
+
 function SingleProdukt() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -14,7 +16,7 @@ function SingleProdukt() {
           `${SingleProductUrl.WORDPRESS_WOO_URL}/${productId}?consumer_key=` +
             import.meta.env.VITE_REACT_APP_CONSUMER_KEY +
             "&consumer_secret=" +
-            import.meta.env.VITE_REACT_APP_CONSUMER_SECRET // Correctly append product ID here
+            import.meta.env.VITE_REACT_APP_CONSUMER_SECRET
         );
 
         setProduct(response.data);
@@ -67,36 +69,36 @@ function SingleProdukt() {
 
               <div className="flex mb-4">
                 <div className="mr-4">
-                  <span className="font-bold text-gray-700 ">Pris:</span>
+                  <span className="font-bold  ">Pris:</span>
                   <span className="text-gray-800 "> {product.price} DKK</span>
                 </div>
                 <div>
-                  <span className="font-bold text-gray-700 ">
-                    Lager status:
-                  </span>
+                  <span className="font-bold  ">Lagerstatus:</span>
                   <span className="text-gray-800 ">{lagerStatus()}</span>
                 </div>
               </div>
 
               <div className="mb-4 flex flex-row flex-wrap  gap-2 items-center ">
-                <span className="font-bold text-gray-700 ">Størrelse</span>
+                <span className="font-bold  ">Størrelse</span>
                 {options.map((sizeOption, index) => (
                   <div className="mt-2" key={index}>
-                    <button className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400">
+                    <button
+                      className={`${
+                        selectedSize === sizeOption
+                          ? "bg-secondary text-white"
+                          : "bg-primary "
+                      } py-2 px-4 rounded-full font-bold mr-2 hover:bg-accent`}
+                      onClick={() => setSelectedSize(sizeOption)}
+                    >
                       {sizeOption}
                     </button>
                   </div>
                 ))}
               </div>
               <div className="flex flex-wrap mx-2 mb-4 mt-8">
-                <div className="w-1/2 px-2">
-                  <button className="w-full bg-gray-900  text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ">
-                    Add to Cart
-                  </button>
-                </div>
-                <div className="w-1/2 px-2">
-                  <button className="w-full bg-gray-200  text-gray-800  py-2 px-4 rounded-full font-bold hover:bg-gray-300 ">
-                    Add to Wishlist
+                <div className="w-full px-2">
+                  <button className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                    Tilføj til kurv
                   </button>
                 </div>
               </div>
