@@ -1,7 +1,7 @@
 import ProduktlisteSettings from "./ProduktlisteSettings";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Url } from "../../utils/Url";
 import Loading from "../../Loading/Loading";
@@ -15,6 +15,7 @@ function Produktliste() {
   const [loadedProductIds, setLoadedProductIds] = useState(new Set());
   const [initialLoad, setInitialLoad] = useState(false);
   const [initialProductsLoaded, setInitialProductsLoaded] = useState(false);
+  const { categorySlug } = useParams();
 
   const fetchProductsAndCategories = async () => {
     try {
@@ -66,10 +67,10 @@ function Produktliste() {
     setInitialProductsLoaded(false);
   };
 
-  const filteredProducts = selectedCategory
+  const filteredProducts = categorySlug
     ? products.filter((product) =>
         product.categories.some(
-          (category) => category.slug === selectedCategory
+          (category) => category.slug === categorySlug
         )
       )
     : products;
