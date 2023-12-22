@@ -6,7 +6,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Url } from "../../utils/Url";
 import Loading from "../../Loading/Loading";
 
-function Produktliste() {
+function Produktliste(props) {
+  const { searchQuery } = props;
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const { categorySlug } = useParams();
@@ -68,15 +69,17 @@ function Produktliste() {
     setLoadedProductIds(new Set());
     setInitialLoad(false);
     setInitialProductsLoaded(false);
-
-  
   };
 
   const filteredProducts = categorySlug
-    ? products.filter((product) =>
-        product.categories.some((category) => category.slug === categorySlug)
+    ? products.filter(
+        (product) =>
+          product.categories &&
+          product.categories.some((category) => category.slug === categorySlug)
       )
-    : products;
+    : products.filter(
+        (product) => product.name && product.name.includes(searchQuery)
+      );
 
   return (
     <div>
@@ -87,11 +90,7 @@ function Produktliste() {
           }`}
           onClick={() => handleCategorySelect(null)}
         >
-          <Link
-            to={`/shop`}
-          >
-            Alle produkter
-          </Link>
+          <Link to={`/shop`}>Alle produkter</Link>
         </button>
         {categories.map((category) => (
           <button
