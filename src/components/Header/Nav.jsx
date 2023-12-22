@@ -1,13 +1,31 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Hovedinfo from "../../utils/Virksomhedsinfo/Hovedinfo";
+import axios from "axios";
+import { Url } from "../../utils/Url";
 
 function Nav() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(Url.WORDPRESS_WOO_URL);
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <div className="">
         <div className="container mx-auto py-4">
           <div className="flex flex-row justify-center items-center  bg-base-100 ">
-            {/*Logo*/}
+            {/* Logo */}
             <div className="flex-none">
               <Link to="/">
                 <img
@@ -17,8 +35,8 @@ function Nav() {
                 />
               </Link>
             </div>
-            {/*søgebar*/}
-            <div className=" justify-center items-center grow ">
+            {/* Søgebar */}
+            <div className="justify-center items-center grow">
               <div className="form-control items-center">
                 <input
                   type="text"
@@ -27,8 +45,8 @@ function Nav() {
                 />
               </div>
             </div>
-            {/*shopping icon med dropdown*/}
-            <div className="dropdown dropdown-end flex-none ">
+            {/* Shopping icon med dropdown */}
+            <div className="dropdown dropdown-end flex-none">
               <div
                 tabIndex="0"
                 role="button"
@@ -42,12 +60,7 @@ function Nav() {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
+                    {/* SVG path here */}
                   </svg>
                   <span className="badge badge-sm indicator-item">8</span>
                 </div>
@@ -67,7 +80,7 @@ function Nav() {
                 </div>
               </div>
             </div>
-            {/*burger menu*/}
+            {/* Burger menu */}
             <div className=" drawer-end lg:hidden">
               <input
                 id="my-drawer-4"
@@ -87,12 +100,7 @@ function Nav() {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h7"
-                    />
+                    {/* SVG path here */}
                   </svg>
                 </label>
               </div>
@@ -103,7 +111,6 @@ function Nav() {
                   className="drawer-overlay"
                 ></label>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                  {/* Sidebar content here */}
                   <li>
                     <a>Sidebar Item 1</a>
                   </li>
@@ -114,34 +121,35 @@ function Nav() {
               </div>
             </div>
           </div>
-          <div className="hidden lg:flex justify-center">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <Link to="/">Hjem</Link>
-              </li>
-              <li>
-                <details>
-                  <summary>
-                    <Link to="/shop">Shop</Link>
-                  </summary>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
+        </div>
+        <div className="hidden lg:flex justify-center">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link to="/">Hjem</Link>
+            </li>
+            <li>
+              <details>
+                <summary>
+                  <Link to="/shop">Shop</Link>
+                </summary>
+                <ul className="p-2 z-50">
+                  {categories.map((categories) => (
+                    <li key={categories.id}>
+                      <Link to={`/category/${categories.slug}`}>
+                        {categories.name}
+                      </Link>
                     </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-              <li>
-                <Link to="/blog">Blog</Link>
-              </li>
-              <li>
-                <Link to="/Kontakt">Kontakt</Link>{" "}
-              </li>
-            </ul>
-          </div>
+                  ))}
+                </ul>
+              </details>
+            </li>
+            <li>
+              <Link to="/blog">Blog</Link>
+            </li>
+            <li>
+              <Link to="/Kontakt">Kontakt</Link>
+            </li>
+          </ul>
         </div>
       </div>
     </>
