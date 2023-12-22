@@ -1,9 +1,8 @@
-import React from "react";
 import NyhedsbrevSettings from "./NyhedsbrevSettings";
 function Nyhedsbrev2() {
   return (
     <>
-      <div className=" py-16 px-6">
+      <div className=" py-12 bg-white rounded-lg shadow-lg">
         <div className="flex flex-col lg:flex-row justify-center items-center xl:space-x-44 lg:space-x-24 space-y-8 lg:space-y-0">
           <div className="md:px-12 lg:px-0 flex flex-col justify-start items-start lg:w-2/5 xl:w-3/12">
             <div>
@@ -36,10 +35,7 @@ function Nyhedsbrev2() {
             </div>
           </div>
           <div>
-            <img
-              src={NyhedsbrevSettings.billede}
-              alt="Nyhedsbrev"
-            />
+            <img src={NyhedsbrevSettings.billede} alt="Nyhedsbrev" />
           </div>
         </div>
       </div>

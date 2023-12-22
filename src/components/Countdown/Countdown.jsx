@@ -31,7 +31,7 @@ function Countdown() {
 
   return (
     <>
-      <div className="flex lg:flex-row flex-col">
+      <div className="flex lg:flex-row flex-col bg-white rounded-lg shadow-lg my-5">
         <figure className="max-w-2xl">
           <img src={placeholderImg} alt="CountDown billede" />
         </figure>
