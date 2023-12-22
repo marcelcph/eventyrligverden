@@ -109,25 +109,27 @@ function Nav() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                {searchResults.length > 0 && searchQuery.trim().length >= 3 && (
-                  <div className="dropdown dropdown-end absolute w-[450px] mt-12 z-50">
-                    <div className="bg-base-100 p-2 rounded-lg shadow-xl">
-                      {searchResults.slice(0, 4).map((result) => (
-                        <div
-                          key={result.id}
-                          className="hover:bg-primary rounded-md p-2 flex items-center"
-                        >
-                          <img
-                            src={result.images[0].src} // Replace this with the correct image source
-                            alt={result.name}
-                            className="w-10 h-10 mr-2"
-                          />
-                          <Link to={`/shop/${result.id}`}>{result.name}</Link>
-                        </div>
-                      ))}
+                {searchResults.length > 0 &&
+                  searchQuery.trim().length >= 3 &&
+                  !isShopRoute && (
+                    <div className="dropdown dropdown-end absolute w-[450px] mt-12 z-50">
+                      <div className="bg-base-100 p-2 rounded-lg shadow-xl">
+                        {searchResults.slice(0, 4).map((result) => (
+                          <div
+                            key={result.id}
+                            className="hover:bg-primary rounded-md p-2 flex items-center"
+                          >
+                            <img
+                              src={result.images[0].src} // Replace this with the correct image source
+                              alt={result.name}
+                              className="w-10 h-10 mr-2"
+                            />
+                            <Link to={`/shop/${result.id}`}>{result.name}</Link>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                 {/* Shopping icon med dropdown */}
                 <div className="hidden lg:flex justify-center">
