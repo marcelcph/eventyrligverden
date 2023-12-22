@@ -9,13 +9,15 @@ import Loading from "../../Loading/Loading";
 function Produktliste() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { categorySlug } = useParams();
+  const [selectedCategory, setSelectedCategory] = useState(
+    categorySlug || null
+  );
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadedProductIds, setLoadedProductIds] = useState(new Set());
   const [initialLoad, setInitialLoad] = useState(false);
   const [initialProductsLoaded, setInitialProductsLoaded] = useState(false);
-  const { categorySlug } = useParams();
 
   const fetchProductsAndCategories = async () => {
     try {
@@ -59,19 +61,20 @@ function Produktliste() {
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
+    console.log(categorySlug, selectedCategory);
     setPage(1);
     setHasMore(true);
     setProducts([]);
     setLoadedProductIds(new Set());
     setInitialLoad(false);
     setInitialProductsLoaded(false);
+
+  
   };
 
   const filteredProducts = categorySlug
     ? products.filter((product) =>
-        product.categories.some(
-          (category) => category.slug === categorySlug
-        )
+        product.categories.some((category) => category.slug === categorySlug)
       )
     : products;
 
@@ -80,11 +83,15 @@ function Produktliste() {
       <div className="flex justify-center my-4">
         <button
           className={`btn mx-2 ${
-            !selectedCategory ? "btn-primary" : "btn-secondary"
+            selectedCategory === null ? "btn-primary" : "btn-secondary"
           }`}
           onClick={() => handleCategorySelect(null)}
         >
-          Alle produkter
+          <Link
+            to={`/shop`}
+          >
+            Alle produkter
+          </Link>
         </button>
         {categories.map((category) => (
           <button
@@ -96,7 +103,7 @@ function Produktliste() {
             }`}
             onClick={() => handleCategorySelect(category.slug)}
           >
-            {category.name}
+            <Link to={`/category/${category.slug}`}>{category.name}</Link>
           </button>
         ))}
       </div>
