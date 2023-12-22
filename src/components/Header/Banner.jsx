@@ -1,4 +1,5 @@
 import BannerSettings from "./BannerSettings";
+import { Link } from "react-router-dom";
 
 function Banner() {
   const svgArrow = (
@@ -17,13 +18,13 @@ function Banner() {
       <div className=" py-4 bg-black text-white ">
         <div className="flex flex-row w-auto max-w-6xl mx-auto justify-center items-center">
           <p>{BannerSettings.tekst}</p>
-          <a
-            href="{BannerSettings.link}"
+          <Link
+            to="/shop/udsalg"
             className="px-4 underline underline-offset-4 flex items-center"
           >
             <span>{BannerSettings.linktekst}</span>
             {svgArrow}
-          </a>
+          </Link>
         </div>
       </div>
     </>

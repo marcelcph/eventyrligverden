@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import Nav from "./components/Header/Nav";
 import Banner from "./components/Header/Banner";
 import Footer2 from "./components/Footer/Footer2";
+import Udsalgsvarer from "./pages/Udsalgsvarer";
 import SingleProdukt from "./components/Singleprodukt/SingleProdukt";
 import SingleBlog from "./components/Singleblog/SingleBlog";
 import Leveringsinfo from "./pages/Leveringsinfo";
@@ -24,6 +25,7 @@ function App() {
           {/* Define routes with Route */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/udsalg" element={<Udsalgsvarer />} />
           <Route path="/shop/:productId" element={<SingleProdukt />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<SingleBlog />} />
