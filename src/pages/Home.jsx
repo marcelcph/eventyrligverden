@@ -1,7 +1,7 @@
 import Hero from "../components/Hero/Hero";
 import ProduktCarousel from "../components/Produktlogo/ProduktCarousel";
 import Countdown from "../components/Countdown/Countdown";
-import Nyhedsbrev from "../components/Nyhedsbrev/Nyhedsbrev";
+import Nyhedsbrev2 from "../components/Nyhedsbrev/Nyhedsbrev2";
 import Feature from "../components/Feature/Feature";
 import Bloguddrag from "../components/Blog/Bloguddrag";
 
@@ -11,7 +11,7 @@ function Home() {
       <Hero />
       <ProduktCarousel />
       <Countdown />
-      <Nyhedsbrev />
+      <Nyhedsbrev2 />
       <Feature />
       <Bloguddrag />
     </div>
