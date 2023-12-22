@@ -7,16 +7,21 @@ import { Url } from "../../utils/Url";
 function Nav() {
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(Url.WORDPRESS_WOO_URL);
-        setCategories(response.data);
-      } catch (error) {
-        console.error("Error fetching categories", error);
-      }
-    };
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(Url.WORDPRESS_WOO_URL, {
+        params: { page: 1 }, // Adjust as needed
+      });
 
+      if (response.data.length > 0 && response.data[0].categories) {
+        setCategories(response.data[0].categories);
+      }
+    } catch (error) {
+      console.error("Error fetching categories", error);
+    }
+  };
+
+  useEffect(() => {
     fetchCategories();
   }, []);
 
@@ -133,10 +138,10 @@ function Nav() {
                   <Link to="/shop">Shop</Link>
                 </summary>
                 <ul className="p-2 z-50">
-                  {categories.map((categories) => (
-                    <li key={categories.id}>
-                      <Link to={`/category/${categories.slug}`}>
-                        {categories.name}
+                  {categories.map((category) => (
+                    <li key={category.id}>
+                      <Link to={`/category/${category.slug}`}>
+                        {category.name}
                       </Link>
                     </li>
                   ))}
