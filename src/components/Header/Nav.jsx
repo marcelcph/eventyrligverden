@@ -131,38 +131,10 @@ function Nav() {
                     </div>
                   )}
 
-                {/* Shopping icon med dropdown */}
-                <div className="hidden lg:flex justify-center">
-                  <ul className="menu menu-horizontal px-1">
-                    <li>
-                      <Link to="/">Hjem</Link>
-                    </li>
-                    <li>
-                      <details>
-                        <summary>
-                          <Link to="/shop">Shop</Link>
-                        </summary>
-                        <ul className="p-2 z-50">
-                          {categories.map((category) => (
-                            <li key={category.id}>
-                              <Link to={`/category/${category.slug}`}>
-                                {category.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
-                    </li>
-                    <li>
-                      <Link to="/blog">Blog</Link>
-                    </li>
-                    <li>
-                      <Link to="/Kontakt">Kontakt</Link>
-                    </li>
-                  </ul>
-                </div>
-                {/* Burger menu */}
-                <div className=" drawer-end lg:hidden">
+              </div>
+            </div>
+            {/* Burger menu */}
+            <div className=" drawer-end block lg:hidden">
                   <input
                     id="my-drawer-4"
                     type="checkbox"
@@ -174,15 +146,7 @@ function Nav() {
                       className="btn btn-ghost btn-circle drawer-button"
                       htmlFor="my-drawer-4"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        {/* SVG path here */}
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                   </div>
 
@@ -202,8 +166,6 @@ function Nav() {
                     </ul>
                   </div>
                 </div>
-              </div>
-            </div>
             {/* Shopping icon med dropdown */}
             <div className="dropdown dropdown-end flex-none">
               <div
@@ -253,6 +215,36 @@ function Nav() {
               </div>
             </div>
           </div>
+          {/* menu stor skærm */}
+          <div className="hidden lg:flex justify-center">
+                  <ul className="menu menu-horizontal">
+                    <li>
+                      <Link to="/">Hjem</Link>
+                    </li>
+                    <li>
+                      <details>
+                        <summary>
+                          <Link to="/shop">Shop</Link>
+                        </summary>
+                        <ul className="p-2 z-50">
+                          {categories.map((category) => (
+                            <li key={category.id}>
+                              <Link to={`/category/${category.slug}`}>
+                                {category.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    </li>
+                    <li>
+                      <Link to="/blog">Blog</Link>
+                    </li>
+                    <li>
+                      <Link to="/Kontakt">Kontakt</Link>
+                    </li>
+                  </ul>
+                </div>
         </div>
       </div>
 
