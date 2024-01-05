@@ -1,3 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        font-family: "Inter", sans-serif;
+      }
+    h1 {
+      @apply lg:text-5xl md:text-3xl text-xl;
+      @apply font-bold;
+      @apply leading-tight;
+    }
+    h2 {
+      @apply text-xl md:text-2xl lg:text-3xl;
+      @apply font-bold;
+     
+    }
+    p{
+        @apply text-sm md:text-base lg:text-lg;
+        @apply font-medium;
+    }
+    button{
+        @apply btn btn-primary hover:btn-secondary;
+       
+    }
+
+    /*Countdown.jsx style*/
+        .stylecountdown{
+            @apply text-primary-content bg-primary rounded-box;
+        }
+
+        .baggrund{
+            @apply bg-neutral-100;
+        }
+
+    /*Nyhedsbrev.jsx*/
+    .baggrundnyhedsbrev{
+        @apply bg-neutral-100;
+    }
+
+  }

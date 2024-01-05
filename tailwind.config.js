@@ -7,30 +7,35 @@ export default {
   theme: {
     extend: {},
   },
+  // https://daisyui.com/theme-generator/ lav dit eget tema og sæt ind
   daisyui: {
-    themes: [
+    themes: [  
       {
         mytheme: {
         
-          "primary": "#0068ff",
+          "primary": "#0F0F0F", //  farve sort designet til knapper og sektion bagrund
                   
-          "secondary": "#00c000",
+          "secondary": "#F4EFEF", // farve hvid designet til knapper og sektion bagrund
+
+          "accent": "#E0C0D3", // farve lyserød designet til knapper og sektion
                   
-          "accent": "#008600",
+          "neutral": "#000000", // tekst farve sort
                   
-          "neutral": "#140200",
+          "neutral-content": "#f3f4f6", // tekst farve hvid
+
+          "base-100": "#f3f4f6", // tekst farve grå
                   
-          "base-100": "#fff4ff",
+          "info": "#3b82f6", // farve blå til info designs
                   
-          "info": "#25c5ff",
+          "success": "#4ade80", // farve grøn til success designs
                   
-          "success": "#00e079",
+          "warning": "#f43f5e", // farve rød til warnings designs
                   
-          "warning": "#ff9700",
-                  
-          "error": "#c03049",
+          "error": "#57534e", // farve mørke grå til errors designs
         },
+        
       },
+      "light", "dark", "luxury",
     ],
   },
   plugins: [require("daisyui")],

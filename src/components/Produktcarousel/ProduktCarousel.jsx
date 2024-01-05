@@ -41,7 +41,7 @@ function ProduktCarousel() {
             className="relative block sm:hidden"
             naturalSlideWidth={100}
             isIntrinsicHeight={true}
-            totalSlides={3}
+            totalSlides={4}
             visibleSlides={1}
             step={1}
             infinite={true}

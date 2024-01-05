@@ -3,9 +3,9 @@ import NyhedsbrevSettings from "./NyhedsbrevSettings";
 function Nyhedsbrev() {
   return (
     <>
-      <div className="bg-accent text-center">
+      <div className="baggrundnyhedsbrev text-center">
         <div className="py-12">
-          <h2 className="text-3xl text-bold pb-5">
+          <h2 className="pb-5">
             {NyhedsbrevSettings.titel}
           </h2>
           <p className="pb-5">{NyhedsbrevSettings.undertitel}</p>
@@ -15,7 +15,7 @@ function Nyhedsbrev() {
             className="input input-bordered input-secondary w-full max-w-sm text-center"
           />
           <div className="justify-end pt-5">
-            <button className="btn btn-primary">
+            <button className="">
               {NyhedsbrevSettings.knaptekst}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
