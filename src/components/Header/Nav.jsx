@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hovedinfo from "../../utils/Virksomhedsinfo/Hovedinfo";
 import axios from "axios";
 import { Url } from "../../utils/Url";
-import Produktliste from "../Produktliste/Produktliste";
 
 function Nav() {
   const [searchQuery, setsearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const location = useLocation();
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
   const fetchCategories = async () => {
@@ -32,22 +31,17 @@ function Nav() {
         params: { page: 1, search: query },
       });
 
-      if (response.data.length > 0) {
-        // Konverter søgning til små bogstaver
-        const lowercaseQuery = query.toLowerCase();
-        const lowercaseResults = response.data.map((result) => ({
-          ...result,
-          name: result.name.toLowerCase(),
-        }));
+      const lowercaseQuery = query.toLowerCase();
+      const lowercaseResults = response.data.map((result) => ({
+        ...result,
+        name: result.name.toLowerCase(),
+      }));
 
-        const filteredResults = lowercaseResults.filter((result) =>
-          result.name.includes(lowercaseQuery)
-        );
+      const filteredResults = lowercaseResults.filter((result) =>
+        result.name.includes(lowercaseQuery)
+      );
 
-        setSearchResults(filteredResults);
-      } else {
-        setSearchResults([]);
-      }
+      setSearchResults(filteredResults);
     } catch (error) {
       console.error("Error fetching search results", error);
     }
@@ -65,13 +59,16 @@ function Nav() {
     }
   }, [searchQuery]);
 
-  const isShopRoute = location.pathname === "/shop";
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/shop?search=${encodeURIComponent(searchQuery)}`);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setSearchResults([]);
-        setsearchQuery(""); //Fjerne query når der klikkes udenfor søgebar
+        setsearchQuery("");
       }
     };
 
@@ -81,6 +78,7 @@ function Nav() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
   return (
     <>
       <div className="">
@@ -102,16 +100,18 @@ function Nav() {
               ref={dropdownRef}
             >
               <div className="form-control items-center">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="input input-bordered w-[150px] md:w-[450px]"
-                  value={searchQuery}
-                  onChange={(e) => setsearchQuery(e.target.value)}
-                />
+              <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="input input-bordered w-[150px] md:w-[450px]"
+                    value={searchQuery}
+                    onChange={(e) => setsearchQuery(e.target.value)}
+                  />
+                </form>
                 {searchResults.length > 0 &&
                   searchQuery.trim().length >= 1 &&
-                  !isShopRoute && (
+                 (
                     <div className="dropdown dropdown-end absolute w-[450px] mt-12 z-50">
                       <div className="bg-base-100 p-2 rounded-lg shadow-xl">
                         {searchResults.slice(0, 6).map((result) => (
@@ -260,7 +260,7 @@ function Nav() {
         </div>
       </div>
 
-      {isShopRoute && <Produktliste searchQuery={searchQuery} />}
+     
     </>
   );
 }

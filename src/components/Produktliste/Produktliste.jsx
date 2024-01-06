@@ -1,29 +1,30 @@
 import ProduktlisteSettings from "./ProduktlisteSettings";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Url } from "../../utils/Url";
 import Loading from "../../Loading/Loading";
 
-function Produktliste(props) {
-  const { searchQuery } = props;
+function Produktliste() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const { categorySlug } = useParams();
-  const [selectedCategory, setSelectedCategory] = useState(
-    categorySlug || null
-  );
+  const [selectedCategory, setSelectedCategory] = useState(categorySlug || null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadedProductIds, setLoadedProductIds] = useState(new Set());
   const [initialLoad, setInitialLoad] = useState(false);
   const [initialProductsLoaded, setInitialProductsLoaded] = useState(false);
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get('search') || '';
 
   const fetchProductsAndCategories = async () => {
     try {
       const response = await axios.get(Url.WORDPRESS_WOO_URL, {
-        params: { page },
+        params: { page, search: searchQuery },
       });
 
       if (response.data.length > 0) {
@@ -58,11 +59,10 @@ function Produktliste(props) {
     } else {
       setInitialLoad(true);
     }
-  }, [page, initialLoad]);
+  }, [page, initialLoad, searchQuery]);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    console.log(categorySlug, selectedCategory);
     setPage(1);
     setHasMore(true);
     setProducts([]);
@@ -77,10 +77,7 @@ function Produktliste(props) {
           product.categories &&
           product.categories.some((category) => category.slug === categorySlug)
       )
-    : products.filter(
-        (product) => product.name && product.name.includes(searchQuery)
-      );
-
+    : products;
   return (
     <div>
       <div className="flex justify-center my-4">
@@ -93,17 +90,22 @@ function Produktliste(props) {
           <Link to={`/shop`}>Alle produkter</Link>
         </button>
         {categories.map((category) => (
-          <button
-            key={category.id}
-            className={`btn mx-2 ${
-              selectedCategory === category.slug
-                ? "btn-primary"
-                : "btn-secondary"
-            }`}
-            onClick={() => handleCategorySelect(category.slug)}
+          <Link to={`/category/${category.slug}`} key={category.id}
+          
+          className={`btn mx-2 ${
+            selectedCategory === category.slug
+              ? "btn-primary"
+              : "btn-secondary"
+          }`}
+          onClick={() => handleCategorySelect(category.slug)}
           >
-            <Link to={`/category/${category.slug}`}>{category.name}</Link>
-          </button>
+       
+            
+           
+       
+            {category.name}
+         
+          </Link>
         ))}
       </div>
 
