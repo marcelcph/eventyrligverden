@@ -1,13 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { CartContext } from '../../contexts/CartContext';
 import { SingleProductUrl } from "../../utils/Url";
+
 
 function SingleProdukt() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const { addToCart } = useContext(CartContext);
+
+  const [showPopup, setShowPopup] = useState(false);
+
+
+  useEffect(() => {
+    if (showPopup) {
+      const timer = setTimeout(() => setShowPopup(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showPopup]);
+  const handleAddToCart = () => {
+    addToCart(product, 1, selectedSize);
+    setShowPopup(true);
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,8 +61,14 @@ function SingleProdukt() {
 
   return (
     <div>
+      {showPopup && (
+        <div role="alert" className=" bg-success fixed left-5 top-5 right-5 md:inset-y-auto flex px-4 py-3 rounded max-w-[500px]" >
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <p>{product.name} er tilføjet til kurven!</p>
+        </div>
+      )}
       {/* Add more details as needed */}
-      <div className="bg-gray-100 py-8">
+      <div className="py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row mx-4">
             <div className="md:flex-1 px-4">
@@ -58,36 +81,36 @@ function SingleProdukt() {
               </div>
             </div>
             <div className="md:flex-1 px-4">
-              <h2 className="text-2xl font-bold text-gray-800  mb-2">
+              <h2 className=" mb-2">
                 {product.name}
               </h2>
 
-              <div
-                className="text-gray-600  text-sm mb-4"
+              <p
+                className=" mb-4"
                 dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
               />
 
               <div className="flex mb-4">
                 <div className="mr-4">
-                  <span className="font-bold  ">Pris:</span>
-                  <span className="text-gray-800 "> {product.price} DKK</span>
+                  <p className="font-bold  ">Pris:</p>
+                  <p className=" ">  {parseFloat(product.price).toFixed(2)}  DKK</p>
                 </div>
                 <div>
-                  <span className="font-bold  ">Lagerstatus:</span>
-                  <span className="text-gray-800 ">{lagerStatus()}</span>
+                  <p className="font-bold  ">Lagerstatus:</p>
+                  <p className=" ">{lagerStatus()}</p>
                 </div>
               </div>
 
               <div className="mb-4 flex flex-row flex-wrap  gap-2 items-center ">
-                <span className="font-bold  ">Størrelse</span>
+                <p className="font-bold  ">Størrelse</p>
                 {options.map((sizeOption, index) => (
                   <div className="mt-2" key={index}>
                     <button
                       className={`${
                         selectedSize === sizeOption
-                          ? "bg-secondary text-white"
+                          ? "bg-secondary "
                           : "bg-primary "
-                      } py-2 px-4 rounded-full font-bold mr-2 hover:bg-accent`}
+                      } py-2 px-4 rounded-full font-bold mr-2 `}
                       onClick={() => setSelectedSize(sizeOption)}
                     >
                       {sizeOption}
@@ -97,9 +120,12 @@ function SingleProdukt() {
               </div>
               <div className="flex flex-wrap mx-2 mb-4 mt-8">
                 <div className="w-full px-2">
-                  <button className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                  <button className="w-full py-2 px-4 rounded-full font-bold"
+                  onClick={handleAddToCart}
+                  >
                     Tilføj til kurv
                   </button>
+                  
                 </div>
               </div>
             </div>

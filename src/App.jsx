@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from './contexts/CartContext';
 
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
@@ -10,6 +11,7 @@ import Footer2 from "./components/Footer/Footer2";
 import Udsalgsvarer from "./pages/Udsalgsvarer";
 import SingleProdukt from "./components/Singleprodukt/SingleProdukt";
 import SingleBlog from "./components/Singleblog/SingleBlog";
+import Cart from "./pages/Cart";
 import Leveringsinfo from "./pages/Leveringsinfo";
 import Handelspolitik from "./pages/Handelspolitik";
 import Cookiepolitikker from "./pages/Cookiepolitik";
@@ -18,6 +20,7 @@ import "./App.css";
 function App() {
   return (
     <>
+    <CartProvider>
       <Router>
         <Banner />
         <Nav />
@@ -27,6 +30,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/udsalg" element={<Udsalgsvarer />} />
           <Route path="/shop/:productId" element={<SingleProdukt />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/category/:categorySlug" element={<Shop />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<SingleBlog />} />
@@ -37,6 +41,7 @@ function App() {
         </Routes>
         <Footer2 />
       </Router>
+      </CartProvider>
     </>
   );
 }
