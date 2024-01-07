@@ -164,12 +164,31 @@ function Nav() {
                       className="drawer-overlay"
                     ></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                      <li>
-                        <a>Sidebar Item 1</a>
-                      </li>
-                      <li>
-                        <a>Sidebar Item 2</a>
-                      </li>
+                    <li>
+                      <Link to="/">Hjem</Link>
+                    </li>
+                    <li>
+                      <details>
+                        <summary>
+                          <Link to="/shop">Shop</Link>
+                        </summary>
+                        <ul className="p-2 z-50">
+                          {categories.map((category) => (
+                            <li key={category.id}>
+                              <Link to={`/category/${category.slug}`}>
+                                {category.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    </li>
+                    <li>
+                      <Link to="/blog">Blog</Link>
+                    </li>
+                    <li>
+                      <Link to="/Kontakt">Kontakt</Link>
+                    </li>
                     </ul>
                   </div>
                 </div>
