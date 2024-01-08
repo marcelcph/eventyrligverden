@@ -38,7 +38,7 @@ useEffect(() => {
 
 
   return (
-    <div className="flex  justify-center">
+    <div className="flex  justify-center w-full">
       <CarouselProvider isIntrinsicHeight={true} totalSlides={3} className="flex flex-col justify-center">
         <div className="lg:hidden  xl:px-0 overflow-y-hidden w-full">
           <div className="  md:max-w-6xl w-full ">
@@ -57,7 +57,7 @@ useEffect(() => {
                   <div
                     aria-controls="slide"
                     aria-label="slide back"
-                    className="rounded-full hover:bg-gray-200 focus:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none cursor-pointer mr-4 p-2 flex items-center justify-center "
+                    className="rounded-full hover:bg-gray-200 focus:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none cursor-pointer flex items-center justify-center "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -110,36 +110,18 @@ useEffect(() => {
               {categories.map((category) => (
                 <Slide key={category.id} index={category.id}>
                   <div className="w-full px-2">
-                    <div className="w-full flex justify-center items-center flex-col rounded-md">
+                  <Link to={`/category/${category.slug}`}>
+                    <div className="w-full flex justify-center items-center flex-col rounded-md h-64 text-center">
                       <div
-                        style={{
-                          backgroundImage:
-                            "url('https://i.ibb.co/93dVNbx/Rectangle-27.png')",
-                        }}
-                        className="relative  bg-cover w-full flex justify-center  flex-col rounded-md "
+                        className="bg-primary bg-cover items-center h-full bg-cover w-full flex justify-center  flex-col rounded-md "
                       >
-                        <h1 className="w-40 text-white font-semibold text-lg absolute left-0 mt-7 ml-7 rounded  h-64 relative">
+                        <h1 className="w-40 text-secondary font-semibold text-lg">
                           {category.name}
                         </h1>
 
-                        <button className="focus:outline-none absolute right-10 bottom-7 bg-white rounded-full p-2 hover:opacity-75">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-gray-600"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </button>
                       </div>
                     </div>
+                    </Link>
                   </div>
                 </Slide>
                 ))}
@@ -153,29 +135,24 @@ useEffect(() => {
         isIntrinsicHeight={true}
         totalSlides={2}
       >
-        <div className="hidden lg:block px-6 xl:px-0 ">
+        <div className="hidden lg:block  ">
           <div className="">
             <div className="flex flex-row">
               <div
                 role="article"
                 className="flex flex-col items-left justify-center w-full py-10"
               >
-                <h1 className="font-bold text-gray-800 text-3xl md:text-5xl">
+                <h1 className="font-bold  text-3xl md:text-5xl">
                   Kategorier
                 </h1>
               </div>
-              <div className="w-full flex flex-col items-end justify-end pr-24 my-3">
-                <p className="text-lg text-gray-100">
-                  <span id="current3"></span>
-                  <span className="text-gray-800"></span>
-                </p>
-              </div>
+              
               <div className="flex items-center gap-2">
                 <ButtonBack>
                   <div
                     aria-controls="slide"
                     aria-label="slide back"
-                    className="rounded-full hover:bg-gray-200 focus:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none cursor-pointer mr-4 p-2 pr-2 flex items-center justify-center "
+                    className="rounded-full hover:bg-gray-200 focus:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none cursor-pointer  flex items-center justify-center "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -234,21 +211,15 @@ useEffect(() => {
                 {categories.map((category) => (
                   <Slide key={category.id} index={category.id}>
                     
-                    <div className="grid grid-cols-1">
+                    <div className="grid grid-cols-1 px-4">
                     <Link to={`/category/${category.slug}`}>
                       <div
                         aria-live="off"
                         aria-roledescription="slide1"
                         className=""
                       >
-                        <div
-                          style={{
-                            backgroundImage:
-                            `url(${category.image && category.image.src ? category.image.src : placeholder})`,
-                          }}
-                          className="relative  bg-cover w-full flex justify-center  flex-col rounded-md "
-                        >
-                          <h1 className="w-40 text-primary font-semibold text-left text-lg absolute left-0 mt-7 ml-7 rounded  h-64 relative">
+                        <div className=" bg-primary bg-cover w-full flex justify-center  flex-col rounded-md items-center h-64 text-center">
+                          <h1 className="w-40 text-secondary font-semibold text-lg  rounded  ">
                             {category.name}
                           </h1>
 

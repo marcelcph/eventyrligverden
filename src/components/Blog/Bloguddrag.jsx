@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import BlogSettings from "./BloglistSettings";
 import axios from "axios";
 import BlogUrl from "../../utils/BlogUrl";
-import Loading from "../../Loading/Loading"; // Import your Loading component
 import { Link } from "react-router-dom";
 
 function Bloguddrag() {
@@ -42,9 +41,9 @@ function Bloguddrag() {
 
   return (
     <>
-      <section className="bg-white rounded-lg shadow-2xl mb-5">
+      <section className="bg-secondary rounded-lg shadow-2xl mb-5">
         <div className="container px-6 py-10 mx-auto">
-          <h1 className="text-center text-6xl pb-5">
+          <h1 className="text-center  pb-5">
             {BlogSettings.uddragtitle}
           </h1>
           <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
@@ -57,9 +56,9 @@ function Bloguddrag() {
                     alt={blogPost.title.rendered}
                   />
                 </div>
-                <h1 className="mt-6 text-xl font-semibold">
+                <h2 className="mt-6">
                   {blogPost.title.rendered}
-                </h1>
+                </h2>
                 <p>
                   {/* Render formatted date */}
                   {blogPost.date}
