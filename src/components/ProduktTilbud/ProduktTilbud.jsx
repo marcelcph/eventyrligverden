@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Url } from "../../utils/Url";
 import Loading from "../../Loading/Loading";
 
-function Produktliste() {
+function ProduktTilbud() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -87,20 +87,23 @@ function Produktliste() {
           Alle produkter
         </button>
         {categories.map((category) => (
-          <button
-            key={category.id}
-            className={`btn mx-2 ${
-              selectedCategory === category.slug
-                ? "btn-primary"
-                : "btn-secondary"
-            }`}
-            onClick={() => handleCategorySelect(category.slug)}
-          >
-            {category.name}
-          </button>
+         <Link to={`/category/${category.slug}`} key={category.id}
+          
+         className={`btn mx-2 ${
+           selectedCategory === category.slug
+             ? "btn-primary"
+             : "btn-secondary"
+         }`}
+         onClick={() => handleCategorySelect(category.slug)}
+         >
+      
+      
+           {category.name}
+        
+         </Link>
         ))}
       </div>
-
+         
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredProducts.map((product) => (
           <div
@@ -135,4 +138,4 @@ function Produktliste() {
   );
 }
 
-export default Produktliste;
+export default ProduktTilbud;

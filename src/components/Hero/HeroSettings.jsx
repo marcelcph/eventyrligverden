@@ -1,10 +1,10 @@
-import placeholderImg from "../../assets/images/placeholder.png";
+import hero from "../../assets/images/placeholder.png";
 
 const HeroSettings = {
   title: "Hero tekst til banner og kampagner",
   beskrivelse: "Undertitel beskrivelse",
   knaptekst: "SE UDVALGET",
-  herobillede: placeholderImg,
+  herobillede: hero,
 };
 
 export default HeroSettings;

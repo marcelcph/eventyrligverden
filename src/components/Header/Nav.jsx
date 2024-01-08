@@ -14,6 +14,7 @@ function Nav() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const { cartItems } = useContext(CartContext);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const fetchCategories = async () => {
     try {
@@ -86,11 +87,33 @@ function Nav() {
  // Beregn total antal varer og subtotal
  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
  const subtotal = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+
+
+
+ //nav fixed
+ // Handle scroll event
+ useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
+  // Add event listener
+  window.addEventListener('scroll', handleScroll);
+
+  // Clean up
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
   return (
     <>
-      <div className="">
-        <div className="container mx-auto py-4">
-          <div className="flex flex-row justify-center items-center  bg-base-100 ">
+      <div className={`  w-full z-10 transition-shadow ${isScrolled ? 'bg-secondary top-0 fixed' : ''}`}>
+        <div className="container mx-auto py-4 ">
+          <div className="flex flex-row justify-center items-center   ">
             {/* Logo */}
             <div className="flex-none">
               <Link to="/">
@@ -124,7 +147,7 @@ function Nav() {
                         {searchResults.slice(0, 6).map((result) => (
                           <div
                             key={result.id}
-                            className="hover:bg-primary rounded-md p-2 flex items-center"
+                            className="hover:bg-primary hover:text-secondary rounded-md p-2 flex items-center"
                           >
                             <img
                               src={result.images[0].src} // Replace this with the correct image source
