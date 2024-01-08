@@ -65,9 +65,10 @@ function Bloguddrag() {
                 </p>
                 <Link
                   to={`/blog/${blogPost.id}`}
-                  className="btn btn-primary mt-4"
-                >
+                  
+                ><button className=" mt-4">
                   {BlogSettings.uddragknaptekst}
+                  </button>
                 </Link>
               </div>
             ))}

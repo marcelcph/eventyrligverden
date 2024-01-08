@@ -38,7 +38,7 @@ useEffect(() => {
 
 
   return (
-    <div className="flex  justify-center w-full">
+    <div className="flex  justify-center flex-1">
       <CarouselProvider isIntrinsicHeight={true} totalSlides={3} className="flex flex-col justify-center">
         <div className="lg:hidden  xl:px-0 overflow-y-hidden w-full">
           <div className="  md:max-w-6xl w-full ">
@@ -219,7 +219,7 @@ useEffect(() => {
                         className=""
                       >
                         <div className=" bg-primary bg-cover w-full flex justify-center  flex-col rounded-md items-center h-64 text-center">
-                          <h1 className="w-40 text-secondary font-semibold text-lg  rounded  ">
+                          <h1 className=" text-secondary font-semibold text-lg  rounded  ">
                             {category.name}
                           </h1>
 

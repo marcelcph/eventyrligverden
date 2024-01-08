@@ -19,6 +19,8 @@ import Cookiepolitikker from "./pages/Cookiepolitik";
 import "./App.css";
 
 function App() {
+
+  
   return (
     <>
     <CartProvider>

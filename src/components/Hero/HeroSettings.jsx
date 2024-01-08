@@ -1,9 +1,9 @@
-import hero from "../../assets/images/placeholder.png";
+import hero from "../../assets/images/heroeventyrligverden.webp";
 
 const HeroSettings = {
-  title: "Hero tekst til banner og kampagner",
-  beskrivelse: "Undertitel beskrivelse",
-  knaptekst: "SE UDVALGET",
+  title: "",
+  beskrivelse: "",
+  knaptekst: "SE PRODUKTER",
   herobillede: hero,
 };
 

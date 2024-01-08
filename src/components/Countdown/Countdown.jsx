@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 import CountdownSettings from "./CountdownSettings.jsx";
-import placeholderImg from "../../assets/images/placeholder.png";
+
 
 function Countdown() {
  
@@ -41,7 +41,7 @@ function Countdown() {
     <>
       <div className="flex lg:flex-row flex-col rounded-lg shadow-lg my-5">
         <figure className="max-w-2xl">
-          <img src={placeholderImg} alt="CountDown-billede" />
+          <img src={CountdownSettings.billede} alt="CountDown-billede" />
         </figure>
         <div className="lg:w-2/3 shadow-xl">
           <div className="card-body baggrund min-h-full">

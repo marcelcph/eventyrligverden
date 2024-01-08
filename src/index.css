@@ -22,13 +22,13 @@
         @apply font-medium;
     }
     button{
-        @apply btn btn-primary hover:btn-secondary;
+        @apply btn btn-primary hover:btn-secondary !text-secondary;
        
     }
 
     /*Countdown.jsx style*/
         .stylecountdown{
-            @apply text-primary-content bg-primary rounded-box;
+            @apply text-secondary bg-primary rounded-box;
         }
 
         .baggrund{

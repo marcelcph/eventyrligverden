@@ -152,7 +152,7 @@ function Footer2() {
                 </div>
 
                 <div>
-                  <h3 className="text-gray-700 uppercase ">Contact</h3>
+                  <h3 className="text-gray-700 uppercase ">Kontakt</h3>
                   <p className="block mt-2 text-sm text-gray-600 hover:underline">
                     {Hovedinfo.telefonNr}
                   </p>

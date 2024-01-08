@@ -1,7 +1,10 @@
+import kampagnebillede from "../../assets/images/kampagne.webp";
+
 const CountdownSettings = {
   title: "Tidsbegrænset kampagne",
-  beskrivelse: "Kort beskrivelse af kampagne ",
+  beskrivelse: " Fantastiske Tilbud hos Eventyrlig Verden! Spar stort på udvalgte produkter!",
   knaptekst: "Køb nu",
+  billede: kampagnebillede,
 
   dage: 10,
   timer: 9,

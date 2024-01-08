@@ -5,7 +5,7 @@ import axios from "axios";
 import { Url } from "../../utils/Url";
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
-import LightDarkMode from "../Lightdarkmode/LightDarkMode";
+
 function Nav() {
 
   const [searchQuery, setsearchQuery] = useState("");
@@ -265,7 +265,7 @@ function Nav() {
                 </div>
               </div>
             </div>
-           <LightDarkMode />
+         
           </div>
           {/* menu stor skærm */}
           <div className="hidden lg:flex justify-center">

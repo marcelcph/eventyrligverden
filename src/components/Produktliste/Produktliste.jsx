@@ -228,8 +228,10 @@ function Produktliste() {
                 ) : (
                   <p className="text-lg font-bold">{product.price} kr.</p>
                 )}
-                <Link to={`/shop/${product.id}`} className="btn btn-primary">
+                <Link to={`/shop/${product.id}`} >
+                  <button>
                   Se mere
+                  </button>
                 </Link>
               </div>
             </div>

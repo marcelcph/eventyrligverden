@@ -13,7 +13,7 @@ export default {
       {
         mytheme: {
         
-          "primary": "#0F0F0F", //  farve til knapper og sektion bagrund
+          "primary": "#c5a690", //  farve til knapper og sektion bagrund
                   
           "secondary": "#fcfcfc", // farve  til knapper og sektion bagrund
 
