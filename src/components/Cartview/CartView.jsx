@@ -3,15 +3,17 @@ import { CartContext } from '../../contexts/CartContext';
 
 function CartView() {
 
-    const { cartItems, updateQuantity } = useContext(CartContext);
+  const { cartItems, updateQuantity, removeItem } = useContext(CartContext);
 
     const subtotal = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
 
     const handleQuantityChange = (item, newQuantity) => {
-        if (newQuantity >= 1) {
-            updateQuantity(item.id, item.selectedSize, newQuantity);
-        }
-    };console.log(cartItems);
+      if (newQuantity > 0) {
+          updateQuantity(item.id, item.selectedSize, newQuantity);
+      } else {
+          removeItem(item.id, item.selectedSize);
+      }
+  };console.log(cartItems);
   return (
         <div className=" pt-20">
           <h1 className="mb-10 text-center text-2xl font-bold">Indkøbskurv</h1>

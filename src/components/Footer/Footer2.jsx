@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Hovedinfo from "../../utils/Virksomhedsinfo/Hovedinfo";
-
+import ScrollToTop from "../../utils/ScrollToTop";
 function Footer2() {
   const nuværendeÅr = new Date().getFullYear();
 
@@ -121,7 +121,7 @@ function Footer2() {
                   >
                     Blog
                   </Link>
-                  <Link
+                  <Link onClick={<ScrollToTop />}
                     to="/kontakt"
                     className="block mt-2 text-sm text-gray-600 hover:underline"
                   >

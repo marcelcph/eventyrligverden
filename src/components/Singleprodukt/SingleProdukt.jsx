@@ -108,7 +108,7 @@ function SingleProdukt() {
                     <button
                       className={`${
                         selectedSize === sizeOption
-                          ? "bg-secondary "
+                          ? "bg-accent "
                           : "bg-primary "
                       } py-2 px-4 rounded-full font-bold mr-2 `}
                       onClick={() => setSelectedSize(sizeOption)}
