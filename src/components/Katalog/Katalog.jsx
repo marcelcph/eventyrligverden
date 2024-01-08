@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link} from "react-router-dom";
 import { Url } from "../../utils/Url";
 import {
   CarouselProvider,
@@ -232,7 +233,9 @@ useEffect(() => {
                 <Slider>
                 {categories.map((category) => (
                   <Slide key={category.id} index={category.id}>
+                    
                     <div className="grid grid-cols-1">
+                    <Link to={`/category/${category.slug}`}>
                       <div
                         aria-live="off"
                         aria-roledescription="slide1"
@@ -249,27 +252,12 @@ useEffect(() => {
                             {category.name}
                           </h1>
 
-                          <button className="focus:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none absolute right-10 bottom-7 bg-white rounded-full p-2 hover:opacity-75">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-6 w-6 text-gray-600"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </button>
+                          
                         </div>
                       </div>
-                     
-                      
+                      </Link>
                     </div>
+                    
                   </Slide>
                   ))}
                   

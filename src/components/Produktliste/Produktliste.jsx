@@ -17,7 +17,6 @@ function Produktliste() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadedProductIds, setLoadedProductIds] = useState(new Set());
-  const [initialLoad, setInitialLoad] = useState(false);
   const [initialProductsLoaded, setInitialProductsLoaded] = useState(false);
   const location = useLocation();
   const [onSale, setOnSale] = useState(false); // New state for on_sale filter
@@ -61,14 +60,10 @@ function Produktliste() {
       console.error("Error fetching products", error);
     }
   };
-
   useEffect(() => {
-    if (initialLoad) {
-      fetchProductsAndCategories();
-    } else {
-      setInitialLoad(true);
-    }
-  }, [page, initialLoad, searchQuery, selectedCategory]);
+    fetchProductsAndCategories();
+    // Other necessary logic
+  }, [page, searchQuery, selectedCategory, ]);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -76,7 +71,7 @@ function Produktliste() {
     setHasMore(true);
     setProducts([]);
     setLoadedProductIds(new Set());
-    setInitialLoad(false);
+   
     setInitialProductsLoaded(false);
   };
 
@@ -97,7 +92,7 @@ function Produktliste() {
     setPage(1);
     setProducts([]);
     setLoadedProductIds(new Set());
-    setInitialLoad(false);
+    
     setInitialProductsLoaded(false);
   };
 
@@ -123,10 +118,7 @@ function Produktliste() {
     setSortOrder(event.target.value);
   };
 
-  // Anvend sortering hver gang produkterne eller sorteringsrækkefølgen ændres
-  const sortedProducts = useMemo(() => {
-    return sortProducts(products, sortOrder);
-  }, [products, sortOrder]);
+
 
   const filteredProducts = useMemo(() => {
     return categorySlug
@@ -139,14 +131,17 @@ function Produktliste() {
         )
       : products;
   }, [products, categorySlug]);
+  
 
   // Sorter de filtrerede produkter
   const sortedAndFilteredProducts = useMemo(() => {
     return sortProducts(filteredProducts, sortOrder);
   }, [filteredProducts, sortOrder]);
+
   return (
     <div>
-      <div className="flex flex-col justify-center my-4">
+      <div className="flex flex-col md:flex-row md:justify-between my-4 md:items-end items-center">
+        <div className="flex flex-col md:flex-row md:items-end grow ">
         <label className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">Filter</span>
@@ -165,7 +160,7 @@ function Produktliste() {
           </select>
         </label>
 
-        <div className="py-5 flex">
+        <div className=" flex md:pl-4 py-4 md:py-0">
           <input
             className="checkbox"
             type="checkbox"
@@ -180,15 +175,18 @@ function Produktliste() {
             Vis kun tilbudsvarer
           </label>
         </div>
+        </div>
+        <div>
         <span className="label-text">Sorter</span>
         <select
           className="select select-bordered select-xs w-full max-w-xs"
           onChange={handleSortChange}
         >
-          <option value="">Sotering</option>
+          <option value="">Relevans</option>
           <option value="billigste_først">Billigste først</option>
           <option value="dyreste_først">Dyreste først</option>
         </select>
+        </div>
       </div>
 
       <InfiniteScroll
@@ -201,7 +199,7 @@ function Produktliste() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {sortedAndFilteredProducts.map((product) => (
             <div
-              key={product.id}
+              key={`${product.id}-${product.length} `}
               className="card shadow-xl flex flex-col bg-accent relative"
             >
               <figure className="relative">
@@ -241,5 +239,7 @@ function Produktliste() {
     </div>
   );
 }
+
+
 
 export default Produktliste;
