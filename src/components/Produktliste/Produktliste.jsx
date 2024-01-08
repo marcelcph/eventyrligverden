@@ -11,7 +11,9 @@ function Produktliste() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const { categorySlug } = useParams();
-  const [selectedCategory, setSelectedCategory] = useState(categorySlug || null);
+  const [selectedCategory, setSelectedCategory] = useState(
+    categorySlug || null
+  );
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadedProductIds, setLoadedProductIds] = useState(new Set());
@@ -20,7 +22,7 @@ function Produktliste() {
   const location = useLocation();
   const [onSale, setOnSale] = useState(false); // New state for on_sale filter
   const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('search') || '';
+  const searchQuery = searchParams.get("search") || "";
   const navigate = useNavigate();
   const [sortOrder, setSortOrder] = useState("");
 
@@ -68,10 +70,6 @@ function Produktliste() {
     }
   }, [page, initialLoad, searchQuery, selectedCategory]);
 
-
-
-
-
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setPage(1);
@@ -86,13 +84,12 @@ function Produktliste() {
     const selectedSlug = event.target.value;
     if (selectedSlug === "all") {
       handleCategorySelect(null);
-      navigate('/shop');
+      navigate("/shop");
     } else {
       handleCategorySelect(selectedSlug);
       navigate(`/category/${selectedSlug}`);
     }
   };
-
 
   const handleOnSaleCheckboxChange = (event) => {
     const newOnSaleValue = event.target.checked;
@@ -107,9 +104,17 @@ function Produktliste() {
   // Funktion til at sortere produkter
   const sortProducts = (products, order) => {
     if (order === "billigste_først") {
-      return [...products].sort((a, b) => parseFloat(a.price || a.sale_price) - parseFloat(b.price || b.sale_price));
+      return [...products].sort(
+        (a, b) =>
+          parseFloat(a.price || a.sale_price) -
+          parseFloat(b.price || b.sale_price)
+      );
     } else if (order === "dyreste_først") {
-      return [...products].sort((a, b) => parseFloat(b.price || b.sale_price) - parseFloat(a.price || a.sale_price));
+      return [...products].sort(
+        (a, b) =>
+          parseFloat(b.price || b.sale_price) -
+          parseFloat(a.price || a.sale_price)
+      );
     }
     return products; // Returner produkterne som de er, hvis ingen sortering er valgt
   };
@@ -128,59 +133,64 @@ function Produktliste() {
       ? products.filter(
           (product) =>
             product.categories &&
-            product.categories.some((category) => category.slug === categorySlug)
+            product.categories.some(
+              (category) => category.slug === categorySlug
+            )
         )
       : products;
   }, [products, categorySlug]);
 
-      // Sorter de filtrerede produkter
+  // Sorter de filtrerede produkter
   const sortedAndFilteredProducts = useMemo(() => {
     return sortProducts(filteredProducts, sortOrder);
   }, [filteredProducts, sortOrder]);
   return (
     <div>
       <div className="flex flex-col justify-center my-4">
-      <label className="form-control w-full max-w-xs">
-        <div className="label">
-          <span className="label-text">Kategori</span>
-        </div>
-        <select 
-          className="select select-bordered" 
-          onChange={handleSelectChange}
-          value={selectedCategory || "all"}
-        >
-          <option value="all">Alle Produkter</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.slug}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </label>
-        
-      <div className="py-5">
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Filter</span>
+          </div>
+          <select
+            className="select select-bordered"
+            onChange={handleSelectChange}
+            value={selectedCategory || "all"}
+          >
+            <option value="all">Alle Produkter</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.slug}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <div className="py-5 flex">
           <input
-            className="din-checkbox-styling"
+            className="checkbox"
             type="checkbox"
             checked={onSale}
             onChange={handleOnSaleCheckboxChange}
-            id="checkboxOnSale" />
+            id="checkboxOnSale"
+          />
           <label
             className="inline-block pl-[0.15rem] hover:cursor-pointer"
-            htmlFor="checkboxOnSale">
-            Vis kun tilbud produkter
+            htmlFor="checkboxOnSale"
+          >
+            Vis kun tilbudsvarer
           </label>
         </div>
-        <select 
-        className="select select-bordered select-xs w-full max-w-xs" 
-        onChange={handleSortChange}
-      >
-        <option value="">Sotering</option>
-        <option value="billigste_først">Billigste først</option>
-        <option value="dyreste_først">Dyreste først</option>
-      </select>
+        <span className="label-text">Sorter</span>
+        <select
+          className="select select-bordered select-xs w-full max-w-xs"
+          onChange={handleSortChange}
+        >
+          <option value="">Sotering</option>
+          <option value="billigste_først">Billigste først</option>
+          <option value="dyreste_først">Dyreste først</option>
+        </select>
       </div>
-     
+
       <InfiniteScroll
         dataLength={products.length}
         next={fetchProductsAndCategories}
