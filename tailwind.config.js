@@ -35,7 +35,7 @@ export default {
         },
         
       },
-      "light", "dark", "luxury",
+      "light", "dark", "luxury", "synthwave", "black", "business"
     ],
   },
   plugins: [require("daisyui")],

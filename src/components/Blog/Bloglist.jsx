@@ -48,8 +48,8 @@ function Bloglist() {
       ) : (
         <section className="">
           <div className="container px-6 py-10 mx-auto">
-            <h1 className="text-center text-6xl pb-5">{BlogSettings.title}</h1>
-            <p className="text-center text-md">{BlogSettings.beskrivelse}</p>
+            <h1 className="text-center pb-5">{BlogSettings.title}</h1>
+            <p className="text-center ">{BlogSettings.beskrivelse}</p>
             <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
               {blogPosts.map((blogPost) => (
                 <div key={blogPost.id}>
@@ -60,9 +60,9 @@ function Bloglist() {
                       alt={blogPost.title.rendered}
                     />
                   </div>
-                  <h1 className="mt-6 text-xl font-semibold">
+                  <h2 className="mt-6 ">
                     {blogPost.title.rendered}
-                  </h1>
+                  </h2>
                   <p>
                     {/* Render formatted date */}
                     {blogPost.date}

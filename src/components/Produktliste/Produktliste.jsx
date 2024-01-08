@@ -196,7 +196,7 @@ function Produktliste() {
         loader={initialProductsLoaded ? <Loading /> : null}
         scrollThreshold={0.9}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {sortedAndFilteredProducts.map((product) => (
             <div
               key={`${product.id}-${product.length} `}

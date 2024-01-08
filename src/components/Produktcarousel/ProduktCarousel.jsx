@@ -173,8 +173,8 @@ function ProduktCarousel() {
                           alt={product.name}
                           className="object-center object-fit w-full h-full"
                         />
-                        <div className="pl-6 pb-6 lg:pl-8 lg:pb-8 absolute left-0 bottom-0">
-                          <h1 className="text-xl leading-5 lg:text-2xl lg:leading-normal font-medium ">
+                        <div className="pl-6 pb-6 lg:pl-8 lg:pb-8 absolute left-0 bottom-0 bg-primary/80 w-full ">
+                          <h1 className="text-xl text-secondary leading-5 lg:text-2xl lg:leading-normal font-medium z-20">
                             {product.name}
                           </h1>
                         </div>
@@ -187,7 +187,7 @@ function ProduktCarousel() {
                           alt={product.name}
                           className="object-center object-cover w-full h-full"
                         />
-                        <div className="pl-6 pb-6 lg:pl-8 lg:pb-8 absolute inset-x-auto bottom-0">
+                        <div className="pl-6 pb-6 lg:pl-8 lg:pb-8 absolute inset-x-auto bottom-0 bg-primary">
                           <h1 className="text-xl leading-5 lg:text-2xl lg:leading-normal font-medium ">
                             {product.name}
                           </h1>
