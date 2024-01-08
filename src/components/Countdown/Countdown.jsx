@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+
 import CountdownSettings from "./CountdownSettings.jsx";
 import placeholderImg from "../../assets/images/placeholder.png";
 
 function Countdown() {
+ 
+
   const [countdownValues, setCountdownValues] = useState({
     sekunder: CountdownSettings.sekunder,
   });
@@ -28,6 +33,9 @@ function Countdown() {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+
+
 
   return (
     <>
@@ -69,9 +77,11 @@ function Countdown() {
             </div>
 
             <div className="card-actions">
+            <Link to="/shop" >  
               <button className="btn btn-primary">
                 {CountdownSettings.knaptekst}
               </button>
+            </Link>
             </div>
           </div>
         </div>

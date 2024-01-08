@@ -1,10 +1,11 @@
-import ProduktlisteSettings from "./ProduktlisteSettings";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
+
 import { Url } from "../../utils/Url";
 import Loading from "../../Loading/Loading";
+import ProduktlisteSettings from "./ProduktlisteSettings";
 
 function Produktliste() {
   const [products, setProducts] = useState([]);
@@ -17,15 +18,21 @@ function Produktliste() {
   const [initialLoad, setInitialLoad] = useState(false);
   const [initialProductsLoaded, setInitialProductsLoaded] = useState(false);
   const location = useLocation();
-
+  const [onSale, setOnSale] = useState(false); // New state for on_sale filter
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('search') || '';
+  const navigate = useNavigate();
+  const [sortOrder, setSortOrder] = useState("");
 
   const fetchProductsAndCategories = async () => {
     try {
-      const response = await axios.get(Url.WORDPRESS_WOO_URL, {
-        params: { page, search: searchQuery },
-      });
+      const params = { page };
+      if (onSale) {
+        params.on_sale = true; // Fetch only on-sale products if a category is selected
+      }
+      params.search = searchQuery; // Include search query if present
+
+      const response = await axios.get(Url.WORDPRESS_WOO_URL, { params });
 
       if (response.data.length > 0) {
         const uniqueProducts = response.data.filter(
@@ -59,7 +66,11 @@ function Produktliste() {
     } else {
       setInitialLoad(true);
     }
-  }, [page, initialLoad, searchQuery]);
+  }, [page, initialLoad, searchQuery, selectedCategory]);
+
+
+
+
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -71,44 +82,105 @@ function Produktliste() {
     setInitialProductsLoaded(false);
   };
 
-  const filteredProducts = categorySlug
-    ? products.filter(
-        (product) =>
-          product.categories &&
-          product.categories.some((category) => category.slug === categorySlug)
-      )
-    : products;
+  const handleSelectChange = (event) => {
+    const selectedSlug = event.target.value;
+    if (selectedSlug === "all") {
+      handleCategorySelect(null);
+      navigate('/shop');
+    } else {
+      handleCategorySelect(selectedSlug);
+      navigate(`/category/${selectedSlug}`);
+    }
+  };
+
+
+  const handleOnSaleCheckboxChange = (event) => {
+    const newOnSaleValue = event.target.checked;
+    setOnSale(newOnSaleValue);
+    setPage(1);
+    setProducts([]);
+    setLoadedProductIds(new Set());
+    setInitialLoad(false);
+    setInitialProductsLoaded(false);
+  };
+
+  // Funktion til at sortere produkter
+  const sortProducts = (products, order) => {
+    if (order === "billigste_først") {
+      return [...products].sort((a, b) => parseFloat(a.price || a.sale_price) - parseFloat(b.price || b.sale_price));
+    } else if (order === "dyreste_først") {
+      return [...products].sort((a, b) => parseFloat(b.price || b.sale_price) - parseFloat(a.price || a.sale_price));
+    }
+    return products; // Returner produkterne som de er, hvis ingen sortering er valgt
+  };
+
+  const handleSortChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  // Anvend sortering hver gang produkterne eller sorteringsrækkefølgen ændres
+  const sortedProducts = useMemo(() => {
+    return sortProducts(products, sortOrder);
+  }, [products, sortOrder]);
+
+  const filteredProducts = useMemo(() => {
+    return categorySlug
+      ? products.filter(
+          (product) =>
+            product.categories &&
+            product.categories.some((category) => category.slug === categorySlug)
+        )
+      : products;
+  }, [products, categorySlug]);
+
+      // Sorter de filtrerede produkter
+  const sortedAndFilteredProducts = useMemo(() => {
+    return sortProducts(filteredProducts, sortOrder);
+  }, [filteredProducts, sortOrder]);
   return (
     <div>
-      <div className="flex justify-center my-4">
-        <button
-          className={`btn mx-2 ${
-            selectedCategory === null ? "btn-primary" : "btn-secondary"
-          }`}
-          onClick={() => handleCategorySelect(null)}
+      <div className="flex flex-col justify-center my-4">
+      <label className="form-control w-full max-w-xs">
+        <div className="label">
+          <span className="label-text">Kategori</span>
+        </div>
+        <select 
+          className="select select-bordered" 
+          onChange={handleSelectChange}
+          value={selectedCategory || "all"}
         >
-          <Link to={`/shop`}>Alle produkter</Link>
-        </button>
-        {categories.map((category) => (
-          <Link to={`/category/${category.slug}`} key={category.id}
-          
-          className={`btn mx-2 ${
-            selectedCategory === category.slug
-              ? "btn-primary"
-              : "btn-secondary"
-          }`}
-          onClick={() => handleCategorySelect(category.slug)}
-          >
-       
-            
-           
-       
-            {category.name}
-         
-          </Link>
-        ))}
+          <option value="all">Alle Produkter</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.slug}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label>
+        
+      <div className="py-5">
+          <input
+            className="din-checkbox-styling"
+            type="checkbox"
+            checked={onSale}
+            onChange={handleOnSaleCheckboxChange}
+            id="checkboxOnSale" />
+          <label
+            className="inline-block pl-[0.15rem] hover:cursor-pointer"
+            htmlFor="checkboxOnSale">
+            Vis kun tilbud produkter
+          </label>
+        </div>
+        <select 
+        className="select select-bordered select-xs w-full max-w-xs" 
+        onChange={handleSortChange}
+      >
+        <option value="">Sotering</option>
+        <option value="billigste_først">Billigste først</option>
+        <option value="dyreste_først">Dyreste først</option>
+      </select>
       </div>
-
+     
       <InfiniteScroll
         dataLength={products.length}
         next={fetchProductsAndCategories}
@@ -117,7 +189,7 @@ function Produktliste() {
         scrollThreshold={0.9}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredProducts.map((product) => (
+          {sortedAndFilteredProducts.map((product) => (
             <div
               key={product.id}
               className="card shadow-xl flex flex-col bg-accent relative"

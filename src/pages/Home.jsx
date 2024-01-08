@@ -1,4 +1,4 @@
-import Hero2 from "../components/Hero/Hero2";
+import Hero from "../components/Hero/Hero";
 import ProduktCarousel from "../components/Produktcarousel/ProduktCarousel";
 import Countdown from "../components/Countdown/Countdown";
 import Nyhedsbrev2 from "../components/Nyhedsbrev/Nyhedsbrev2";
@@ -8,7 +8,7 @@ import Katalog from "../components/Katalog/Katalog";
 function Home() {
   return (
     <div className="container mx-auto">
-      <Hero2 />
+      <Hero />
       <Katalog />
       <ProduktCarousel />
       <Countdown />

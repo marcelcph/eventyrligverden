@@ -1,5 +1,6 @@
-import placeholderImg from "../../assets/images/placeholder.png";
+import { Link } from "react-router-dom";
 import HeroSettings from "./HeroSettings.jsx";
+
 
 function Hero2() {
   return (
@@ -9,7 +10,7 @@ function Hero2() {
         <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
           <img
             className="w-full h-full lg:max-w-3xl"
-            src={placeholderImg}
+            src={HeroSettings.herobillede}
             alt="Catalogue-pana.svg"
           />
         </div>
@@ -23,10 +24,11 @@ function Hero2() {
             <p className="mt-3  ">
               {HeroSettings.beskrivelse}
             </p>
-
+            <Link to="/shop">
             <button className="">
-              Køb nu
+            {HeroSettings.knaptekst}
             </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export default {
         
           "primary": "#0F0F0F", //  farve sort designet til knapper og sektion bagrund
                   
-          "secondary": "#F4EFEF", // farve hvid designet til knapper og sektion bagrund
+          "secondary": "#fcfcfc", // farve hvid designet til knapper og sektion bagrund
 
           "accent": "#E0C0D3", // farve lyserød designet til knapper og sektion
                   

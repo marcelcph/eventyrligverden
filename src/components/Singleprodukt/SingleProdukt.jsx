@@ -68,7 +68,7 @@ function SingleProdukt() {
         </div>
       )}
       {/* Add more details as needed */}
-      <div className="py-8">
+      <div className="py-8 lg:py-28">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row mx-4">
             <div className="md:flex-1 px-4">

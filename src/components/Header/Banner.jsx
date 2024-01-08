@@ -19,7 +19,7 @@ function Banner() {
         <div className="flex flex-row w-auto max-w-6xl mx-auto justify-center items-center">
           <p>{BannerSettings.tekst}</p>
           <Link
-            to="/shop/udsalg"
+            to="/shop"
             className="px-4 underline underline-offset-4 flex items-center"
           >
             <span>{BannerSettings.linktekst}</span>
